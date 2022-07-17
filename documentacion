@@ -1,0 +1,12 @@
+crea proyecto angular : "ng new nombre"
+bootstrap:npm install bootstrap jquery @popperjs/core
+
+angular.json a 2 styles  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+script "node_modules/jquery/dist/jquery.min.js",
+  "node_modules/@popperjs/core/dist/umd/popper.min.js",
+  "node_modules/bootstrap/dist/js/bootstrap.min.js"
+
+
+componente en angular
+
