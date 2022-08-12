@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT})
+@RequestMapping("administrative")
 public class administrativeController {
 
     @Autowired
@@ -16,21 +18,26 @@ public class administrativeController {
 
     @PostMapping(value = "/save")
     public ResponseEntity<?> saveAdministrative(@RequestBody Administrative administrative){
-    return new ResponseEntity<>(administrativeServiceImplement.saveAdministrative(administrative), HttpStatus.CREATED);
+    return new ResponseEntity<>(administrativeServiceImplement.saveAdministrative(administrative), HttpStatus.OK);
     }
 
     @GetMapping(value = "/search/{id}")
     public ResponseEntity<?> findAdministrative(@PathVariable("id") Long id){
-        return new ResponseEntity<>(administrativeServiceImplement.searchById(id), HttpStatus.FOUND);
+        return new ResponseEntity<>(administrativeServiceImplement.searchById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/findAll")
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok(administrativeServiceImplement.findAll());
     }
 
     @PutMapping(value = "/update/{id}")
-    public ResponseEntity<?> findAdministrative(@PathVariable ("id") Long id,@PathVariable Administrative administrative){
+    public ResponseEntity<?> findAdministrative(@PathVariable ("id") Long id,@RequestBody Administrative administrative){
         return new ResponseEntity<>(administrativeServiceImplement.updateAdministrative(administrative, id) , HttpStatus.OK);
     }
     @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> borrarAlumno (@RequestBody Administrative administrative, @PathVariable Long id) {
-        administrativeServiceImplement.deleteAdministrative(administrative,id);
+    public ResponseEntity<?> borrarAlumno ( @PathVariable Long id) {
+        administrativeServiceImplement.deleteAdministrative(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
